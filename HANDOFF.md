@@ -12,17 +12,28 @@ FIL in negotiating fair compensation with his company.
 ## Current state
 Deploy scaffold landed: `.github/workflows/deploy-main.yml` and
 `deploy-dev.yml` (daedalus pattern, peaceiris/actions-gh-pages@v4,
-gh-pages branch as source), plus `site/index.html` with a
-hand-coded `site/banner.svg` hero (dark neon, neural-net motif +
-semi-truck silhouette, "JESSICA AI" wordmark). `corpus/` holds the
-2026-05-17 Pilot Flying J pricing (XLS + README; proprietary) plus
-`corpus/geo/us_cities.csv` (public, MIT) used by code in `src/`.
-First `src/` tool landed: `src/fuel_optimizer/` — a gas-price-optimal
-refueling planner (Khuller-Malekian-Mestre greedy) with a built-in
-sample route set; sample output committed at
-`corpus/pilot-flying-j/2026-05-17/optimized-routes.md`. `notes/`
-still empty. Pages should be pointed at `gh-pages` branch / root
-in repo Settings.
+gh-pages branch as source), plus `site/index.html` (banner + link
+tile to the route planner) and `site/banner.svg`. `corpus/` holds
+the 2026-05-17 Pilot Flying J pricing (XLS + README; proprietary)
+plus `corpus/geo/us_cities.csv` (public, MIT) used by code in `src/`.
+
+`src/fuel_optimizer/` — gas-price-optimal refueling planner
+(Khuller-Malekian-Mestre greedy). CLI with a built-in sample route
+set; sample output at `corpus/pilot-flying-j/2026-05-17/optimized-routes.md`.
+`src/fuel_optimizer/web_build.py` builds the encrypted bundle that
+the route planner serves: AES-GCM blob (`site/route-planner/data.enc.json`)
++ a copy of the public cities CSV. Rebuild on each new pricing drop;
+the script prints a fresh random passcode to stderr if `--passcode`
+isn't given.
+
+`site/route-planner/` is the public-facing static app: HTML +
+Leaflet + Web Crypto + OSRM driving directions + the JS-ported
+optimizer. The encrypted blob ships in the deployed bundle; without
+the passcode the data is unreadable. Passcode is **not** in the
+repo — whoever runs `web_build.py` owns it.
+
+`notes/` still empty. Pages should be pointed at `gh-pages` branch
+/ root in repo Settings.
 
 ## Planned layout (build as needed; not all up front)
 - `site/` — public-deployable material (slides, marketing, polished

@@ -25,6 +25,20 @@
     h1 { margin: 0 0 0.25rem; font-size: 1.6rem; }
     p { margin: 0.75em 0; }
     .muted { opacity: 0.65; font-size: 0.95em; }
+    .tools { margin: 1.5em 0; padding: 0; list-style: none; }
+    .tools li { margin: 0.5em 0; }
+    .tools a {
+      display: inline-block;
+      padding: 0.55em 0.9em;
+      border-radius: 6px;
+      text-decoration: none;
+      background: rgba(0, 229, 255, 0.12);
+      border: 1px solid rgba(0, 229, 255, 0.35);
+      color: inherit;
+      font-weight: 600;
+    }
+    .tools a:hover { background: rgba(0, 229, 255, 0.22); }
+    .tools .lock::before { content: "🔒 "; }
   </style>
 </head>
 <body>
@@ -32,7 +46,12 @@
   <div class="content">
     <h1>Jessica AI Project</h1>
     <p>Support workspace for an LLM-fronted trucking-logistics platform.</p>
-    <p class="muted">Placeholder page. Material will appear here as the project develops.</p>
+    <ul class="tools">
+      <li><a class="lock" href="route-planner/">Route planner</a> &mdash;
+        gas-price-optimized fueling, with on-route Pilot stations
+        color-graded by price (passcode-gated)</li>
+    </ul>
+    <p class="muted">More material will appear here as the project develops.</p>
   </div>
 </body>
 </html>
