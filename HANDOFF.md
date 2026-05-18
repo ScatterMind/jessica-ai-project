@@ -12,10 +12,12 @@ FIL in negotiating fair compensation with his company.
 ## Current state
 Deploy scaffold landed: `.github/workflows/deploy-main.yml` and
 `deploy-dev.yml` (daedalus pattern, peaceiris/actions-gh-pages@v4,
-gh-pages branch as source), plus a placeholder `site/index.html`.
-`notes/` and `src/` still empty — build out per layout below as
-needed. Pages must still be enabled in repo Settings after the
-first deploy lands on `main` (see Web deploy section).
+gh-pages branch as source), plus `site/index.html` with a
+hand-coded `site/banner.svg` hero (dark neon, neural-net motif +
+semi-truck silhouette, "JESSICA AI" wordmark). `notes/` and `src/`
+still empty — build out per layout below as needed. Pages must
+still be enabled in repo Settings after the first deploy lands on
+`main` (see Web deploy section).
 
 ## Planned layout (build as needed; not all up front)
 - `site/` — public-deployable material (slides, marketing, polished
