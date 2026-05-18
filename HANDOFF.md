@@ -29,11 +29,13 @@ isn't given.
 `site/route-planner/` is the public-facing static app: HTML +
 Leaflet + Web Crypto + OSRM driving directions + the JS-ported
 optimizer. The encrypted blob ships in the deployed bundle; without
-the passcode the data is unreadable. Passcode is **not** in the
-repo — whoever runs `web_build.py` owns it.
+the passcode the data is unreadable. Passcode lives at
+`notes/route-planner-passcode.md` — `notes/` does not deploy
+(`.github/workflows/deploy-main.yml` only publishes `./site`), so
+it stays private to the repo. Rotate via `web_build.py --passcode`
+and update that file in lockstep.
 
-`notes/` still empty. Pages should be pointed at `gh-pages` branch
-/ root in repo Settings.
+Pages should be pointed at `gh-pages` branch / root in repo Settings.
 
 ## Planned layout (build as needed; not all up front)
 - `site/` — public-deployable material (slides, marketing, polished
