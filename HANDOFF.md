@@ -10,8 +10,12 @@ outward-facing material. Helps the product succeed and supports
 FIL in negotiating fair compensation with his company.
 
 ## Current state
-Fresh scaffold. Only the standard 4 files exist. No subdirs, no
-workflows, no content. Build out per the layout below.
+Deploy scaffold landed: `.github/workflows/deploy-main.yml` and
+`deploy-dev.yml` (daedalus pattern, peaceiris/actions-gh-pages@v4,
+gh-pages branch as source), plus a placeholder `site/index.html`.
+`notes/` and `src/` still empty — build out per layout below as
+needed. Pages must still be enabled in repo Settings after the
+first deploy lands on `main` (see Web deploy section).
 
 ## Planned layout (build as needed; not all up front)
 - `site/` — public-deployable material (slides, marketing, polished
@@ -47,8 +51,13 @@ AND `notes/` content needs review before granting access. A future
 session proposing to add FIL should pause and confirm with the user.
 
 ## Dev branch
-None yet. First per-repo Claude session to do real work should create
-one and record its name here.
+`dev` — long-lived staging branch that `deploy-dev.yml` watches
+(publishes `site/` to `gh-pages/dev/`). Not yet created; first
+session that needs a staging deploy creates it off `main`.
+
+This session's own work happened on the system-assigned
+`claude/setup-project-scaffold-TzrW2`, PR'd straight to `main`
+(no staging needed for the scaffold itself).
 
 ## Standing rules
 Destructive-action rules are enforced by hooks in

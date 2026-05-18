@@ -1,0 +1,33 @@
+name: Deploy dev to gh-pages /dev/
+
+on:
+  push:
+    branches: [dev]
+    paths:
+      - 'site/**'
+      - '.github/workflows/deploy-dev.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Publish site/ to gh-pages /dev/
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          publish_branch: gh-pages
+          destination_dir: dev
+          user_name: github-actions[bot]
+          user_email: 41898282+github-actions[bot]@users.noreply.github.com
+          commit_message: "Deploy dev ${{ github.sha }} to /dev/"
