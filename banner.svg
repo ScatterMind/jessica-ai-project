@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" role="img" aria-labelledby="banner-title">
+  <title id="banner-title">Jessica AI</title>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="65%" r="80%">
+      <stop offset="0" stop-color="#0a1230"/>
+      <stop offset="0.6" stop-color="#06091f"/>
+      <stop offset="1" stop-color="#000"/>
+    </radialGradient>
+    <linearGradient id="neon" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#00e5ff"/>
+      <stop offset="0.5" stop-color="#7c4dff"/>
+      <stop offset="1" stop-color="#ff2d92"/>
+    </linearGradient>
+    <linearGradient id="horizon" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#00e5ff" stop-opacity="0"/>
+      <stop offset="0.3" stop-color="#00e5ff" stop-opacity="0.9"/>
+      <stop offset="0.7" stop-color="#ff2d92" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#ff2d92" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="textGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2.5"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="bigGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#1a2050" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="400" fill="url(#bg)"/>
+  <rect width="1200" height="400" fill="url(#grid)" opacity="0.5"/>
+
+  <line x1="0" y1="310" x2="1200" y2="310" stroke="url(#horizon)" stroke-width="2" filter="url(#bigGlow)"/>
+  <ellipse cx="600" cy="322" rx="500" ry="28" fill="#7c4dff" opacity="0.25" filter="url(#bigGlow)"/>
+
+  <g opacity="0.55">
+    <line x1="600" y1="310" x2="120" y2="400" stroke="#7c4dff" stroke-width="1"/>
+    <line x1="600" y1="310" x2="1080" y2="400" stroke="#ff2d92" stroke-width="1"/>
+    <line x1="600" y1="310" x2="430" y2="400" stroke="#7c4dff" stroke-width="0.5" opacity="0.5"/>
+    <line x1="600" y1="310" x2="770" y2="400" stroke="#7c4dff" stroke-width="0.5" opacity="0.5"/>
+  </g>
+
+  <g filter="url(#softGlow)" opacity="0.85">
+    <line x1="90" y1="90" x2="170" y2="60" stroke="#00e5ff" stroke-width="1" opacity="0.4"/>
+    <line x1="170" y1="60" x2="240" y2="110" stroke="#00e5ff" stroke-width="1" opacity="0.4"/>
+    <line x1="170" y1="60" x2="120" y2="170" stroke="#7c4dff" stroke-width="1" opacity="0.4"/>
+    <line x1="240" y1="110" x2="120" y2="170" stroke="#7c4dff" stroke-width="1" opacity="0.4"/>
+    <line x1="90" y1="90" x2="120" y2="170" stroke="#00e5ff" stroke-width="1" opacity="0.4"/>
+    <circle cx="90" cy="90" r="3" fill="#00e5ff"/>
+    <circle cx="170" cy="60" r="4" fill="#00e5ff"/>
+    <circle cx="240" cy="110" r="3" fill="#7c4dff"/>
+    <circle cx="120" cy="170" r="3" fill="#7c4dff"/>
+  </g>
+
+  <g filter="url(#softGlow)" opacity="0.85">
+    <line x1="960" y1="110" x2="1040" y2="60" stroke="#ff2d92" stroke-width="1" opacity="0.4"/>
+    <line x1="1040" y1="60" x2="1110" y2="120" stroke="#ff2d92" stroke-width="1" opacity="0.4"/>
+    <line x1="960" y1="110" x2="1080" y2="170" stroke="#7c4dff" stroke-width="1" opacity="0.4"/>
+    <line x1="1110" y1="120" x2="1080" y2="170" stroke="#7c4dff" stroke-width="1" opacity="0.4"/>
+    <line x1="1040" y1="60" x2="1080" y2="170" stroke="#ff2d92" stroke-width="1" opacity="0.4"/>
+    <circle cx="960" cy="110" r="3" fill="#ff2d92"/>
+    <circle cx="1040" cy="60" r="4" fill="#ff2d92"/>
+    <circle cx="1110" cy="120" r="3" fill="#7c4dff"/>
+    <circle cx="1080" cy="170" r="3" fill="#ff2d92"/>
+  </g>
+
+  <g transform="translate(385, 250)" filter="url(#softGlow)">
+    <rect x="0" y="0" width="300" height="55" rx="3" fill="#04081a" stroke="url(#neon)" stroke-width="2"/>
+    <line x1="75" y1="5" x2="75" y2="50" stroke="#00e5ff" stroke-width="0.5" opacity="0.35"/>
+    <line x1="150" y1="5" x2="150" y2="50" stroke="#7c4dff" stroke-width="0.5" opacity="0.35"/>
+    <line x1="225" y1="5" x2="225" y2="50" stroke="#ff2d92" stroke-width="0.5" opacity="0.35"/>
+    <path d="M 300 12 L 360 12 L 395 45 L 395 55 L 300 55 Z" fill="#04081a" stroke="url(#neon)" stroke-width="2"/>
+    <path d="M 310 20 L 354 20 L 382 45 L 310 45 Z" fill="#00e5ff" opacity="0.45"/>
+    <circle cx="392" cy="50" r="2" fill="#fff" opacity="0.95"/>
+    <path d="M 395 50 L 425 44 L 425 56 Z" fill="#00e5ff" opacity="0.3"/>
+    <circle cx="50" cy="60" r="11" fill="#000" stroke="url(#neon)" stroke-width="1.5"/>
+    <circle cx="95" cy="60" r="11" fill="#000" stroke="url(#neon)" stroke-width="1.5"/>
+    <circle cx="250" cy="60" r="11" fill="#000" stroke="url(#neon)" stroke-width="1.5"/>
+    <circle cx="350" cy="60" r="11" fill="#000" stroke="url(#neon)" stroke-width="1.5"/>
+    <circle cx="50" cy="60" r="3.5" fill="#00e5ff"/>
+    <circle cx="95" cy="60" r="3.5" fill="#00e5ff"/>
+    <circle cx="250" cy="60" r="3.5" fill="#7c4dff"/>
+    <circle cx="350" cy="60" r="3.5" fill="#ff2d92"/>
+    <line x1="320" y1="12" x2="320" y2="-15" stroke="#00e5ff" stroke-width="1" opacity="0.6"/>
+    <circle cx="320" cy="-15" r="3" fill="#00e5ff"/>
+  </g>
+
+  <text x="600" y="170" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="96" font-weight="900" fill="url(#neon)" text-anchor="middle" filter="url(#textGlow)" letter-spacing="6">JESSICA AI</text>
+  <text x="600" y="208" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#b6c0e6" text-anchor="middle" letter-spacing="10" opacity="0.8">FREIGHT  ·  DISPATCH  ·  INTELLIGENCE</text>
+</svg>
