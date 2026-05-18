@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jessica AI · Route Planner</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Jessica AI · Route Planner</h1>
+    <p>Gas-price-optimized fueling on actual driving routes, with on-route Pilot Flying J stations color-graded by price.</p>
+  </header>
+
+  <main id="locked">
+    <div class="passcode-prompt">
+      <h2>Locked</h2>
+      <p>This planner uses confidential KJS Transport / Pilot Flying J pricing.
+        Enter the passcode to unlock.</p>
+      <input id="passcode" type="password" placeholder="passcode" autocomplete="off" autofocus>
+      <button id="unlock-btn">Unlock</button>
+      <p id="unlock-error" class="error"></p>
+      <p class="muted small">
+        The encrypted blob is bundled with this page; it can't be read without
+        the passcode. PBKDF2-SHA-256 (200k) + AES-GCM, decrypted in your
+        browser via Web Crypto.
+      </p>
+    </div>
+  </main>
+
+  <main id="unlocked" hidden>
+    <div class="controls">
+      <label>Origin
+        <input id="origin" type="text" placeholder="Brampton, ON" value="Brampton, ON">
+      </label>
+      <label>Destination
+        <input id="dest" type="text" placeholder="Dallas, TX" value="Dallas, TX">
+      </label>
+      <label>Tank gal
+        <input id="tank" type="number" value="200" step="any">
+      </label>
+      <label>MPG
+        <input id="mpg" type="number" value="6.5" step="any">
+      </label>
+      <label>Start gal
+        <input id="start" type="text" placeholder="full" value="">
+      </label>
+      <button id="plan-btn">Plan route</button>
+      <span id="status"></span>
+    </div>
+    <div class="layout">
+      <div id="map"></div>
+      <aside id="results">
+        <p class="muted">Enter origin / destination, then click <b>Plan route</b>.</p>
+        <p class="muted small">Pricing snapshot: <span id="snapshot"></span>.
+          On-route detour ≤ 20 mi. Routing via OSRM public demo
+          (driving profile, no toll preferences).</p>
+      </aside>
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="app.js"></script>
+</body>
+</html>
