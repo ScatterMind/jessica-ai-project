@@ -14,12 +14,15 @@ Deploy scaffold landed: `.github/workflows/deploy-main.yml` and
 `deploy-dev.yml` (daedalus pattern, peaceiris/actions-gh-pages@v4,
 gh-pages branch as source), plus `site/index.html` with a
 hand-coded `site/banner.svg` hero (dark neon, neural-net motif +
-semi-truck silhouette, "JESSICA AI" wordmark). `corpus/` seeded
-with `corpus/pilot-flying-j/2026-05-17/` (vendor diesel-pricing
-XLS + README capturing the vendor cover note, schema, and a quick
-analysis — proprietary, do-not-publish). `notes/` and `src/` still
-empty. Pages should be pointed at `gh-pages` branch / root in repo
-Settings.
+semi-truck silhouette, "JESSICA AI" wordmark). `corpus/` holds the
+2026-05-17 Pilot Flying J pricing (XLS + README; proprietary) plus
+`corpus/geo/us_cities.csv` (public, MIT) used by code in `src/`.
+First `src/` tool landed: `src/fuel_optimizer/` — a gas-price-optimal
+refueling planner (Khuller-Malekian-Mestre greedy) with a built-in
+sample route set; sample output committed at
+`corpus/pilot-flying-j/2026-05-17/optimized-routes.md`. `notes/`
+still empty. Pages should be pointed at `gh-pages` branch / root
+in repo Settings.
 
 ## Planned layout (build as needed; not all up front)
 - `site/` — public-deployable material (slides, marketing, polished
