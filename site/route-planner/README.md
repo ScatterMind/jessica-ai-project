@@ -7,8 +7,10 @@ Flying J stations to the route polyline, and runs the
 the result on a Leaflet/OSM map with all on-route stations color-graded
 by price and the optimal-stop subset highlighted.
 
-This folder is part of `site/` so it deploys with the rest of the public
-site to `https://scattermind.github.io/jessica-ai-project/route-planner/`.
+Allowlisted files in this folder deploy to
+`https://scattermind.github.io/jessica-ai-project/route-planner/`.
+The allowlist is the `cp` block in `scripts/build-dist.sh` — this
+README is **not** in it, so it stays in-repo only.
 
 ## Why passcode-gated
 

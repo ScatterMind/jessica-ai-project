@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'site/**'
+      - 'scripts/build-dist.sh'
       - '.github/workflows/deploy-main.yml'
   workflow_dispatch:
 
@@ -21,11 +22,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Publish site/ to gh-pages root
+      - name: Build dist/ from allowlist
+        run: bash scripts/build-dist.sh
+
+      - name: Publish dist/ to gh-pages root
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./site
+          publish_dir: ./dist
           publish_branch: gh-pages
           keep_files: true
           user_name: github-actions[bot]

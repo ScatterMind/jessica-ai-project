@@ -3,3 +3,7 @@ __pycache__/
 *.pyo
 .python-version
 .venv/
+
+# Local output of scripts/build-dist.sh; the deploy workflows
+# rebuild it on every run, so it should never be committed.
+/dist/
