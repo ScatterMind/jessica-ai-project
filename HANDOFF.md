@@ -12,9 +12,13 @@ FIL in negotiating fair compensation with his company.
 ## Current state
 Deploy scaffold landed: `.github/workflows/deploy-main.yml` and
 `deploy-dev.yml` (daedalus pattern, peaceiris/actions-gh-pages@v4,
-gh-pages branch as source), plus `site/index.html` (banner + link
-tile to the route planner) and `site/banner.svg`. `corpus/` holds
-the 2026-05-17 Pilot Flying J pricing (XLS + README; proprietary)
+gh-pages branch as source). Both workflows run `scripts/build-dist.sh`
+first — a hand-maintained **allowlist** that copies only the files
+intended to deploy from `site/` into a runner-side `dist/` before
+publishing. Anything in `site/` not listed in the script does not
+deploy. Both workflows publish `dist/` (not `site/`); home page is
+`site/index.html` + `site/banner.svg`. `corpus/` holds the
+2026-05-17 Pilot Flying J pricing (XLS + README; proprietary)
 plus `corpus/geo/us_cities.csv` (public, MIT) used by code in `src/`.
 
 `src/fuel_optimizer/` — gas-price-optimal refueling planner
@@ -30,18 +34,20 @@ isn't given.
 Leaflet + Web Crypto + OSRM driving directions + the JS-ported
 optimizer. The encrypted blob ships in the deployed bundle; without
 the passcode the data is unreadable. Passcode lives at
-`notes/route-planner-passcode.md` — `notes/` does not deploy
-(`.github/workflows/deploy-main.yml` only publishes `./site`), so
-it stays private to the repo. Rotate via `web_build.py --passcode`
-and update that file in lockstep.
+`notes/route-planner-passcode.md` — `notes/` does not deploy (only
+the build-dist.sh allowlist does), so it stays private to the repo.
+Rotate via `web_build.py --passcode` and update that file in
+lockstep. Note: `site/route-planner/README.md` is intentionally
+**not** in the allowlist — kept as in-repo developer docs only.
 
 Pages should be pointed at `gh-pages` branch / root in repo Settings.
 
 ## Planned layout (build as needed; not all up front)
 - `site/` — public-deployable material (slides, marketing, polished
-  docs). Deploys to gh-pages. **Anything that lands here is
-  world-readable** at the deploy URL even though this repo is
-  private. Be deliberate.
+  docs). Files here only ship to the public Pages URL if they appear
+  in the allowlist inside `scripts/build-dist.sh`. Be deliberate
+  about adding to the allowlist — once a file is listed, it's
+  world-readable at the deploy URL even though this repo is private.
 - `corpus/` — reference documents that inform project development:
   vendor reports, data dumps, fragments of source material to be
   analyzed. Private, never deploys. Distinct from `notes/` (raw
@@ -53,22 +59,33 @@ Pages should be pointed at `gh-pages` branch / root in repo Settings.
 - `src/` — code: scratch prototypes, tooling to help FIL move faster,
   fragments mirrored from his codebase for analysis.
 
-## Web deploy (to set up — first per-repo session task)
-Pattern: daedalus model.
+## Web deploy
+Pattern: daedalus model, allowlist build, gh-pages branch source.
+- Pages source: `gh-pages` branch / root (Settings → Pages). Set
+  once, manually.
 - `.github/workflows/deploy-main.yml` — `main` → gh-pages root →
   `https://scattermind.github.io/jessica-ai-project/`
-- `.github/workflows/deploy-dev.yml` — dev branch → `gh-pages/dev` →
-  `https://scattermind.github.io/jessica-ai-project/dev/`
-- After workflows merge, ask the user to enable GitHub Pages
-  (Settings → Pages → source: gh-pages branch, root).
+- `.github/workflows/deploy-dev.yml` — `dev` branch → `gh-pages/dev`
+  → `https://scattermind.github.io/jessica-ai-project/dev/`
+- Both workflows trigger on `site/**`, `scripts/build-dist.sh`, or
+  their own workflow file changing. Both run `bash scripts/build-dist.sh`
+  first to assemble the allowlisted `dist/`, then publish that.
+- **Allowlist lives in `scripts/build-dist.sh`** as a literal block
+  of `cp` commands. Adding a new public file = add a `cp` line,
+  commit. Files in `site/` not listed are logged under "Files in
+  site/ NOT deployed" in CI output so they stay visible.
 
-## Do not publish (i.e. do not place in `site/`)
+## Do not publish (i.e. do not add to the build-dist.sh allowlist)
 - Negotiation, compensation, or business-strategy material related
   to FIL's employer
 - Anything from FIL's proprietary codebase or internal documents
 - Personal communication or anything FIL hasn't explicitly cleared
   for outside eyes
 - Add to this list as cases come up
+
+(Items can still live in `site/` for build inputs — they just don't
+get a `cp` line. Items that should never be in the repo at all
+belong in `notes/` or `corpus/`.)
 
 ## Collaboration
 **Solo workspace.** FIL is NOT a contributor — no read or write
