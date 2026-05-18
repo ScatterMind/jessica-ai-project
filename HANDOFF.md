@@ -14,16 +14,24 @@ Deploy scaffold landed: `.github/workflows/deploy-main.yml` and
 `deploy-dev.yml` (daedalus pattern, peaceiris/actions-gh-pages@v4,
 gh-pages branch as source), plus `site/index.html` with a
 hand-coded `site/banner.svg` hero (dark neon, neural-net motif +
-semi-truck silhouette, "JESSICA AI" wordmark). `notes/` and `src/`
-still empty — build out per layout below as needed. Pages must
-still be enabled in repo Settings after the first deploy lands on
-`main` (see Web deploy section).
+semi-truck silhouette, "JESSICA AI" wordmark). `corpus/` seeded
+with `corpus/pilot-flying-j/2026-05-17/` (vendor diesel-pricing
+XLS + README capturing the vendor cover note, schema, and a quick
+analysis — proprietary, do-not-publish). `notes/` and `src/` still
+empty. Pages should be pointed at `gh-pages` branch / root in repo
+Settings.
 
 ## Planned layout (build as needed; not all up front)
 - `site/` — public-deployable material (slides, marketing, polished
   docs). Deploys to gh-pages. **Anything that lands here is
   world-readable** at the deploy URL even though this repo is
   private. Be deliberate.
+- `corpus/` — reference documents that inform project development:
+  vendor reports, data dumps, fragments of source material to be
+  analyzed. Private, never deploys. Distinct from `notes/` (raw
+  thinking) and `src/` (code). Use date-stamped subfolders under a
+  source key (e.g. `corpus/<source>/<YYYY-MM-DD>/`) so recurring
+  drops slot in the same shape.
 - `notes/` — private workspace inside the private repo. Negotiation
   strategy, comp research, raw thinking. Never deploys.
 - `src/` — code: scratch prototypes, tooling to help FIL move faster,
