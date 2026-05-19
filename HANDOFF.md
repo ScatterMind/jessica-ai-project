@@ -112,17 +112,33 @@ judgement-based update rules as every other ScatterMind repo.
 **2026-05-19 retrofit (meta session, no app code touched):** mirrored
 `scattermind/meta` PR #17 — `.claude/settings.json` updated byte-identical
 to new meta canonical (SessionStart hook now also cats `FUTURE.md`), and
-a starter `FUTURE.md` added at repo root with the cross-Claude message
-channels (`## From meta` / `## For meta`). See `## Meta AI / cross-repo
-coordination` below for the model.
+a starter `FUTURE.md` added at repo root.
+
+**2026-05-19 second pass (this PR):** the cross-Claude channels
+(`## From meta` and `## For meta`) moved from FUTURE.md to this
+HANDOFF (below the Meta AI section). Rationale: those are AI-to-AI
+plumbing and belong in the AI-first file. No functional change —
+same content, new location.
 
 ## Meta AI / cross-repo coordination
 
 This repo is one of several under the `ScatterMind` GitHub account, organized by a **control-plane Claude session** in [`scattermind/meta`](https://github.com/ScatterMind/meta). Things to know:
 
 - **`.claude/settings.json` is byte-identical across every ScatterMind repo.** Meta is canonical. If a hook needs editing, propose the change in `scattermind/meta` first, merge there, then mirror byte-for-byte here via a separate PR — never edit this file in isolation. (Meta HANDOFF "Daedalus drift incident" has the cautionary tale.)
-- **`FUTURE.md` is the cross-Claude message channel.** Two sections matter:
+- **Cross-Claude message channels live in this HANDOFF** (below). Two sections:
   - `## From meta` — meta-session writes allocated tasks or notes here. Read at session start for direction.
-  - `## For meta` — write here when there's something meta should know. Meta reads at its next multi-repo session start.
+  - `## For meta` — write here when there's something meta should know. Meta reads at its next multi-repo session start (via `scattermind/meta/setup/multi-repo-prime.sh`, which extracts those two sections from each sibling HANDOFF).
 - **Templates** for repeated repo shapes live in [`scattermind/meta/templates/`](https://github.com/ScatterMind/meta/tree/main/templates). Today: `templates/gh-pages/` (whitelist deploy YAMLs, static-`<PUBLISH_DIR>` shape). This repo's `scripts/build-dist.sh` allowlist is a shell-script variant of the same idea — meta's template README treats jessica-ai-project alongside daedalus and blinker as "variant to copy" pointers for build-time allowlist filtering. **No migration intended** for this repo.
 - **Full meta-side rules** live in [`scattermind/meta/HANDOFF.md`](https://github.com/ScatterMind/meta/blob/main/HANDOFF.md). Worth skimming "Standard project repo structure", "Drift scan — standing meta-session task", and "Multi-repo meta session setup" once.
+
+## From meta
+
+_Meta-session writes here; this repo's per-repo Claude reads at SessionStart for direction. Don't delete entries without resolving them._
+
+- **2026-05-19 — `scattermind/meta/templates/gh-pages/` exists.** Whitelist-style static-`<PUBLISH_DIR>` deploy template for new repos. Jessica-ai-project's existing **allowlist via `scripts/build-dist.sh`** (shipped 2026-05-18, PRs #4-#5) is a shell-script variant of the same idea — instead of a static `<PUBLISH_DIR>` the build script enumerates `cp` lines for each publishable file. Functionally equivalent guardrail; the meta template's README treats jessica-ai-project alongside daedalus and blinker as "real-world variants to copy from" for new repos that need build-time allowlist filtering. **No action required**: jessica-ai-project keeps its current pattern.
+
+## For meta
+
+_This repo's per-repo Claude writes here when there's something meta should know — meta reads it at its next multi-repo session start._
+
+(empty)
