@@ -136,6 +136,7 @@ This repo is one of several under the `ScatterMind` GitHub account, organized by
 _Meta-session writes here; this repo's per-repo Claude reads at SessionStart for direction. Don't delete entries without resolving them._
 
 - **2026-05-19 — `scattermind/meta/templates/gh-pages/` exists.** Whitelist-style static-`<PUBLISH_DIR>` deploy template for new repos. Jessica-ai-project's existing **allowlist via `scripts/build-dist.sh`** (shipped 2026-05-18, PRs #4-#5) is a shell-script variant of the same idea — instead of a static `<PUBLISH_DIR>` the build script enumerates `cp` lines for each publishable file. Functionally equivalent guardrail; the meta template's README treats jessica-ai-project alongside daedalus and blinker as "real-world variants to copy from" for new repos that need build-time allowlist filtering. **No action required**: jessica-ai-project keeps its current pattern.
+- **2026-05-19 — `.claude/settings.json` hook regex hardened (meta #22).** The Bash PreToolUse `git push` deny regex now also catches the `+main`/`+master` refspec force-push form (character class `[[:space:]:+]`, was `[[:space:]:]`). Found during tcs branch-protection testing: `git push origin +main` bypassed the hook because no space-or-colon preceded "main"; server-side protection caught it (HTTP 403) but the hook should be the first layer. This PR mirrors the byte-identical canonical to jessica-ai-project. **No action required**: behavior change only affects force-push attempts on main, which are blocked at both layers now.
 
 ## For meta
 
