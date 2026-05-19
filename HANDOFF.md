@@ -108,3 +108,21 @@ Destructive-action rules are enforced by hooks in
 HANDOFF-update rule is enforced by the Stop hook on real-work turns.
 Read the SessionStart-injected context for the live list. Same
 judgement-based update rules as every other ScatterMind repo.
+
+**2026-05-19 retrofit (meta session, no app code touched):** mirrored
+`scattermind/meta` PR #17 — `.claude/settings.json` updated byte-identical
+to new meta canonical (SessionStart hook now also cats `FUTURE.md`), and
+a starter `FUTURE.md` added at repo root with the cross-Claude message
+channels (`## From meta` / `## For meta`). See `## Meta AI / cross-repo
+coordination` below for the model.
+
+## Meta AI / cross-repo coordination
+
+This repo is one of several under the `ScatterMind` GitHub account, organized by a **control-plane Claude session** in [`scattermind/meta`](https://github.com/ScatterMind/meta). Things to know:
+
+- **`.claude/settings.json` is byte-identical across every ScatterMind repo.** Meta is canonical. If a hook needs editing, propose the change in `scattermind/meta` first, merge there, then mirror byte-for-byte here via a separate PR — never edit this file in isolation. (Meta HANDOFF "Daedalus drift incident" has the cautionary tale.)
+- **`FUTURE.md` is the cross-Claude message channel.** Two sections matter:
+  - `## From meta` — meta-session writes allocated tasks or notes here. Read at session start for direction.
+  - `## For meta` — write here when there's something meta should know. Meta reads at its next multi-repo session start.
+- **Templates** for repeated repo shapes live in [`scattermind/meta/templates/`](https://github.com/ScatterMind/meta/tree/main/templates). Today: `templates/gh-pages/` (whitelist deploy YAMLs, static-`<PUBLISH_DIR>` shape). This repo's `scripts/build-dist.sh` allowlist is a shell-script variant of the same idea — meta's template README treats jessica-ai-project alongside daedalus and blinker as "variant to copy" pointers for build-time allowlist filtering. **No migration intended** for this repo.
+- **Full meta-side rules** live in [`scattermind/meta/HANDOFF.md`](https://github.com/ScatterMind/meta/blob/main/HANDOFF.md). Worth skimming "Standard project repo structure", "Drift scan — standing meta-session task", and "Multi-repo meta session setup" once.
