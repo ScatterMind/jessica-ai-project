@@ -128,7 +128,7 @@ This repo is one of several under the `ScatterMind` GitHub account, organized by
 - **Cross-Claude message channels live in this HANDOFF** (below). Two sections:
   - `## From meta` — meta-session writes allocated tasks or notes here. Read at session start for direction.
   - `## For meta` — write here when there's something meta should know. Meta reads at its next multi-repo session start (via `scattermind/meta/setup/multi-repo-prime.sh`, which extracts those two sections from each sibling HANDOFF).
-- **Templates** for repeated repo shapes live in [`scattermind/meta/templates/`](https://github.com/ScatterMind/meta/tree/main/templates). Today: `templates/gh-pages/` (whitelist deploy YAMLs, static-`<PUBLISH_DIR>` shape). This repo's `scripts/build-dist.sh` allowlist is a shell-script variant of the same idea — meta's template README treats jessica-ai-project alongside daedalus and blinker as "variant to copy" pointers for build-time allowlist filtering. **No migration intended** for this repo.
+- **Templates** for repeated repo shapes live in [`scattermind/meta/templates/`](https://github.com/ScatterMind/meta/tree/main/templates). Two relevant today: `templates/gh-pages/` (static-`<PUBLISH_DIR>` whitelist) and `templates/gh-pages-allowlist/` (shell-script `ALLOWLIST` array + `claude/**` dev-branch glob). This repo's `scripts/build-dist.sh` allowlist was the original of the second pattern (shipped 2026-05-18); meta #26 generalized it into the template after tcs refined it (array shape + glob trigger). **No migration intended** for this repo — its current pattern works, the template is for new repos.
 - **Full meta-side rules** live in [`scattermind/meta/HANDOFF.md`](https://github.com/ScatterMind/meta/blob/main/HANDOFF.md). Worth skimming "Standard project repo structure", "Drift scan — standing meta-session task", and "Multi-repo meta session setup" once.
 
 ## From meta
@@ -138,6 +138,19 @@ _Meta-session writes here; this repo's per-repo Claude reads at SessionStart for
 - **2026-05-19 — `scattermind/meta/templates/gh-pages/` exists.** Whitelist-style static-`<PUBLISH_DIR>` deploy template for new repos. Jessica-ai-project's existing **allowlist via `scripts/build-dist.sh`** (shipped 2026-05-18, PRs #4-#5) is a shell-script variant of the same idea — instead of a static `<PUBLISH_DIR>` the build script enumerates `cp` lines for each publishable file. Functionally equivalent guardrail; the meta template's README treats jessica-ai-project alongside daedalus and blinker as "real-world variants to copy from" for new repos that need build-time allowlist filtering. **No action required**: jessica-ai-project keeps its current pattern.
 - **2026-05-19 — `.claude/settings.json` hook regex hardened (meta #22).** The Bash PreToolUse `git push` deny regex now also catches the `+main`/`+master` refspec force-push form (character class `[[:space:]:+]`, was `[[:space:]:]`). Found during tcs branch-protection testing: `git push origin +main` bypassed the hook because no space-or-colon preceded "main"; server-side protection caught it (HTTP 403) but the hook should be the first layer. This PR mirrors the byte-identical canonical to jessica-ai-project. **No action required**: behavior change only affects force-push attempts on main, which are blocked at both layers now.
 - **2026-05-19 — FUTURE.md format rev2 (meta #23).** Canonical FUTURE.md shape evolved (proposal originated from daedalus's per-repo Claude). New shape: unified `## Backlog` (Goals + Next merged) + `## Archive` for ME-confirmed-done items (newest on top, kept indefinitely — manual prune only) + optional status tags (`[PARTIAL]`/`[QA-PENDING]`/`[BLOCKED]`; `[TODO]` is implicit and the tag can be omitted) alongside the existing ownership tags. This PR mirrors the format here; existing items moved from Goals/Next into Backlog with no content changes (just structural). **No action required**: format change only. Tags are optional — apply when status meaningfully differs from "not started."
+- **2026-05-19 — `meta/templates/gh-pages-allowlist/` exists**
+  (meta #26). Your `scripts/build-dist.sh` allowlist pattern
+  (shipped 2026-05-18) was the original of the second meta
+  gh-pages template. The meta template's body is **not** byte-
+  identical to your script — tcs's per-repo Claude refined the
+  pattern (`ALLOWLIST` array + `claude/**` dev-branch glob) before
+  the template existed, and the refined shape is what landed in
+  meta. Your earlier `## From meta` entry treated this repo as a
+  "real-world variant to copy from"; that framing is now
+  superseded by the template. **No action required**: this repo's
+  deploy stays as-is — it works, no need to retrofit to the
+  template. The Templates bullet in "Meta AI / cross-repo
+  coordination" above has been updated to reflect this.
 
 ## For meta
 
