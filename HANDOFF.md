@@ -148,6 +148,18 @@ This repo is one of several under the `ScatterMind` GitHub account, organized by
 
 _Meta-session writes here; this repo's per-repo Claude reads at SessionStart for direction. Don't delete entries without resolving them._
 
+- **2026-05-20 — SessionStart prime FRONT-LOADED (meta #31).** A live daedalus
+  reset confirmed the injection cap is a low byte limit (<~24KB) — head slices
+  don't fit inline; the resume block carries sessions. Canonical
+  `.claude/session-start-prime.sh` mirrored here byte-for-byte: it now front-loads
+  the diag + a truncation/recovery note + the `source=='compact'` checkpoint
+  instruction + your resume block into the first ~2KB (so they survive a 2KB
+  preview), shrinks the slice (12000→6000), extracts the `## From meta` inbox ONLY
+  (drops `## For meta` + `FUTURE.md` from the prime — read on demand). Your prime
+  is now ~7-10KB. `.claude/settings.json` is UNCHANGED. **No action required** —
+  just keep your resume block (top of HANDOFF, ≤1.2KB) current; it's the
+  load-bearing element now.
+
 - **2026-05-20 — Compaction & priming overhaul (meta #27).** Canonical
   `.claude/settings.json` + a NEW byte-identical companion
   `.claude/session-start-prime.sh` shipped here byte-for-byte. SessionStart no
