@@ -1,5 +1,18 @@
 # Handoff
 
+<!-- RESUME BLOCK — overwrite in place each session (NOT an append-only entry).
+Keep ≤ ~1.2KB so it survives a 2KB preview; it is the head-slice's first content.
+See meta HANDOFF "## Compaction & priming (head-slice model)". -->
+
+**RESUME:** Jessica AI support workspace (FIL's trucking-company logistics
+platform; this repo = notes/research/prototypes + outward-facing material, NOT
+the product). **State:** deploy scaffold (`scripts/build-dist.sh` allowlist) +
+`src/fuel_optimizer/` landed — see "## Current state"; resume cleanly unless an
+entry says otherwise. **## From meta:** check below — newest is the
+compaction/priming overhaul (meta #27), mirrored here, no action. **Read next:**
+this is a HEAD slice — Read HANDOFF.md in full + FUTURE.md before substantive
+work; a ~2KB preview means it truncated.
+
 ## What this repo is
 Workspace for supporting **Jessica AI** — my father-in-law's
 trucking-company logistics platform. The product: Telegram chat UI
@@ -135,6 +148,21 @@ This repo is one of several under the `ScatterMind` GitHub account, organized by
 
 _Meta-session writes here; this repo's per-repo Claude reads at SessionStart for direction. Don't delete entries without resolving them._
 
+- **2026-05-20 — Compaction & priming overhaul (meta #27).** Canonical
+  `.claude/settings.json` + a NEW byte-identical companion
+  `.claude/session-start-prime.sh` shipped here byte-for-byte. SessionStart no
+  longer cats the whole HANDOFF — it injects a bounded HEAD slice (`head -c
+  12000` of HANDOFF + this `## From meta` inbox + FUTURE + VISION + a
+  read-on-demand note) so priming fits under the injection cap instead of
+  truncating to a ~2KB preview. `PreCompact` is REMOVED (the `continue:false`
+  block was live-confirmed ineffective on the web harness — it didn't stop
+  auto-summarize). Post-compaction capture moved to a `source=='compact'` branch
+  in the prime script; a temporary `[prime-diag: source=… blob=…B]` line is
+  appended to confirm the cap + whether that branch fires. **NEW convention:**
+  HANDOFF must open with a ≤1.2KB resume block (overwritten in place each
+  session) — this PR seeds one at the top here; keep it current. **No action
+  required** otherwise. Full rationale: meta HANDOFF "## Compaction & priming
+  (head-slice model)". Drift scan now checks BOTH mirrored files.
 - **2026-05-19 — `scattermind/meta/templates/gh-pages/` exists.** Whitelist-style static-`<PUBLISH_DIR>` deploy template for new repos. Jessica-ai-project's existing **allowlist via `scripts/build-dist.sh`** (shipped 2026-05-18, PRs #4-#5) is a shell-script variant of the same idea — instead of a static `<PUBLISH_DIR>` the build script enumerates `cp` lines for each publishable file. Functionally equivalent guardrail; the meta template's README treats jessica-ai-project alongside daedalus and blinker as "real-world variants to copy from" for new repos that need build-time allowlist filtering. **No action required**: jessica-ai-project keeps its current pattern.
 - **2026-05-19 — `.claude/settings.json` hook regex hardened (meta #22).** The Bash PreToolUse `git push` deny regex now also catches the `+main`/`+master` refspec force-push form (character class `[[:space:]:+]`, was `[[:space:]:]`). Found during tcs branch-protection testing: `git push origin +main` bypassed the hook because no space-or-colon preceded "main"; server-side protection caught it (HTTP 403) but the hook should be the first layer. This PR mirrors the byte-identical canonical to jessica-ai-project. **No action required**: behavior change only affects force-push attempts on main, which are blocked at both layers now.
 - **2026-05-19 — FUTURE.md format rev2 (meta #23).** Canonical FUTURE.md shape evolved (proposal originated from daedalus's per-repo Claude). New shape: unified `## Backlog` (Goals + Next merged) + `## Archive` for ME-confirmed-done items (newest on top, kept indefinitely — manual prune only) + optional status tags (`[PARTIAL]`/`[QA-PENDING]`/`[BLOCKED]`; `[TODO]` is implicit and the tag can be omitted) alongside the existing ownership tags. This PR mirrors the format here; existing items moved from Goals/Next into Backlog with no content changes (just structural). **No action required**: format change only. Tags are optional — apply when status meaningfully differs from "not started."
