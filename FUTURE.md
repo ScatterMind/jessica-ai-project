@@ -25,9 +25,9 @@ internal notebook. Some redundancy between them is fine.
   ME-confirmed done, move it under `## Archive` with a one-line
   ship note. If partially shipped, update the status tag (and
   prose if useful). Bias toward keeping `## Backlog` focused.
-- No cross-Claude channels here. Those live in HANDOFF.md
-  (`## From meta` / `## For meta` sections) — AI-to-AI plumbing
-  belongs in the AI-first file.
+- No cross-Claude channels here. Those live in `CHAT.md`
+  (`## Inbox` / `## Outbox` / `## Archive`) — AI-to-AI plumbing
+  has its own home, not this human-facing roadmap.
 
 ## Backlog
 
