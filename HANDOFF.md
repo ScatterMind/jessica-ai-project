@@ -148,6 +148,17 @@ This repo is one of several under the `ScatterMind` GitHub account, organized by
 
 _Meta-session writes here; this repo's per-repo Claude reads at SessionStart for direction. Don't delete entries without resolving them._
 
+- **2026-05-28 — `.claude/settings.json` hardened (meta #36).** Push-to-main
+  deny regex char class flipped from `[[:space:]:+]` to `[[:space:]/:+]`,
+  closing the `/main` bypass — `git push -u origin HEAD:refs/heads/main`
+  (the fully-qualified refspec form) is now blocked along with the three
+  forms already caught (` main`, `:main`, `+main`). Canonical SHA:
+  `396fd187` → `58c01496`. This PR mirrors the change byte-identically to
+  jessica-ai-project; no behavior change in normal PR workflow, just one
+  previously-bypassing direct-to-main form now also denied. Hooks load at
+  session start, so the new regex takes effect on your NEXT session.
+  **No action required.**
+
 - **2026-05-20 — SessionStart prime FRONT-LOADED (meta #31).** A live daedalus
   reset confirmed the injection cap is a low byte limit (<~24KB) — head slices
   don't fit inline; the resume block carries sessions. Canonical

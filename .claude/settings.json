@@ -28,7 +28,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cmd=$(jq -r '.tool_input.command // empty'); if echo \"$cmd\" | grep -qE 'git[[:space:]]+push[^|;&]*[[:space:]:+](main|master)([[:space:]]|$)'; then echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"Direct push to main/master is blocked. Push to a dev branch and open a PR instead.\"}}'; fi"
+            "command": "cmd=$(jq -r '.tool_input.command // empty'); if echo \"$cmd\" | grep -qE 'git[[:space:]]+push[^|;&]*[[:space:]/:+](main|master)([[:space:]]|$)'; then echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"Direct push to main/master is blocked. Push to a dev branch and open a PR instead.\"}}'; fi"
           }
         ]
       }
