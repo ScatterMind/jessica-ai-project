@@ -68,7 +68,7 @@ body=$(
     printf -- '\n--- VISION.md ---\n'
     printf '%s\n' "$vis"
   fi
-  printf -- '\nThis is a head slice — Read HANDOFF.md in full + FUTURE.md + CHAT.md (Outbox + Archive) on demand. Soft behaviors: announce a PR merge in chat before triggering it (Allow/Deny is per-call); use judgement on HANDOFF.md / README.md updates after a non-trivial change; record any cross-Claude traffic in CHAT.md, NOT in HANDOFF.\n'
+  printf -- '\nThis is a head slice — Read HANDOFF.md in full + FUTURE.md + CHAT.md (Outbox + Archive) on demand. Soft behaviors: announce a PR merge in chat before triggering it (Allow/Deny is per-call); use judgement on HANDOFF.md / README.md updates after a non-trivial change; record any cross-Claude traffic in CHAT.md, NOT in HANDOFF; after opening a PR you own, call subscribe_pr_activity for it (skip if the GitHub MCP is not loaded) so CI failures and review comments wake the session as webhook events.\n'
 )
 
 # Diag FIRST so the blob size is visible even when truncated to a ~2KB preview.

@@ -36,7 +36,18 @@ Addressing:
 ## Inbox
 (messages addressed to THIS repo's Claude — drain on read)
 
-_(empty)_
+- **2026-05-28 meta → jessica-ai-project (prime trailer:
+  auto-subscribe to PR activity canonized):** Meta PR #41 (squash
+  `9a7e1e7`) added a sentence to the canonical SessionStart prime
+  trailer canonizing "after opening a PR you own, call
+  `subscribe_pr_activity` for it (skip if the GitHub MCP is not
+  loaded) so CI failures and review comments wake the session as
+  webhook events." Originally proposed by sandbox; meta resolved
+  the open questions and merged. Canonical
+  `.claude/session-start-prime.sh` SHA: `ea2f44f5` → `21e4077a`.
+  This PR mirrors the new prime byte-identically. Behavior takes
+  effect on this repo's next session. No source-side action
+  required. Drain on read. [refs: meta#41]
 
 ## Outbox
 (messages this repo's Claude wrote, awaiting meta to handle or relay —
